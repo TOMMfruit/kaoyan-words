@@ -1,0 +1,363 @@
+/* ============ 全局变量与主题 ============ */
+:root {
+  --bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --text: #1f2937;
+  --text-sub: #6b7280;
+  --primary: #4f6ef7;
+  --primary-light: #eef1ff;
+  --border: #e5e7eb;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --danger: #ef4444;
+  --warn: #f59e0b;
+  --success: #10b981;
+}
+
+[data-theme="dark"] {
+  --bg: #111827;
+  --card-bg: #1f2937;
+  --text: #e5e7eb;
+  --text-sub: #9ca3af;
+  --primary: #7c8cf8;
+  --primary-light: #26304a;
+  --border: #374151;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ============ 顶部导航 ============ */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand { font-size: 18px; font-weight: 700; }
+
+.nav { display: flex; gap: 8px; flex: 1; }
+
+.nav-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--primary-light); }
+.nav-btn.active { background: var(--primary); color: #fff; font-weight: 600; }
+
+.theme-btn {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card-bg);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ============ 容器与页面 ============ */
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px 60px; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* ============ 学习页 ============ */
+.study-header { margin-bottom: 12px; }
+.stats { display: flex; gap: 20px; color: var(--text-sub); font-size: 14px; flex-wrap: wrap; }
+.stats b { color: var(--primary); font-size: 16px; }
+
+.settings-bar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+.setting-item input[type="number"],
+.setting-item select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+}
+.setting-item input[type="number"] { width: 64px; }
+.setting-item input:focus,
+.setting-item select:focus { border-color: var(--primary); }
+.apply-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.apply-btn:hover { opacity: 0.9; }
+.reset-btn {
+  padding: 8px 18px;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.reset-btn:hover { background: var(--danger); color: #fff; }
+
+.card-wrap { perspective: 1200px; margin: 20px auto; max-width: 520px; }
+
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+.card.flipped { transform: rotateY(180deg); }
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-back { transform: rotateY(180deg); }
+
+.word { font-size: 40px; font-weight: 800; letter-spacing: 1px; }
+.phonetic { color: var(--text-sub); font-size: 18px; margin-top: 12px; }
+.speak-btn {
+  margin-top: 14px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card-bg);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.speak-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+.hint { color: var(--text-sub); font-size: 13px; margin-top: 30px; }
+
+.trans-list { margin-top: 16px; width: 100%; text-align: left; max-height: 220px; overflow-y: auto; }
+.trans-item { font-size: 16px; line-height: 1.6; margin-bottom: 6px; color: var(--text); }
+.trans-item .tpos { color: var(--primary); font-weight: 700; margin-right: 6px; }
+.example { color: var(--text-sub); font-size: 15px; margin-top: 22px; line-height: 1.6; }
+.example-cn { color: var(--text-sub); font-size: 14px; margin-top: 8px; }
+
+/* 自评按钮 */
+.grade-btns {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.grade-btns.show { display: flex; }
+
+.grade {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.grade:hover { transform: translateY(-2px); }
+.grade.forget { background: var(--danger); }
+.grade.fuzzy { background: var(--warn); }
+.grade.know { background: var(--success); }
+
+.empty-tip { text-align: center; color: var(--text-sub); padding: 80px 0; font-size: 16px; }
+
+/* ============ 测试页 ============ */
+.test-mode-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+.mode-btn {
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card-bg);
+  color: var(--text-sub);
+  cursor: pointer;
+}
+.mode-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.quiz-box { background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); padding: 28px; }
+.quiz-progress {
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.quiz-word { font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 8px; }
+.quiz-question { text-align: center; color: var(--text-sub); margin-bottom: 20px; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  cursor: pointer;
+  text-align: left;
+  font-size: 15px;
+  transition: all 0.15s;
+}
+.option:hover { border-color: var(--primary); }
+.option.correct { border-color: var(--success); background: rgba(16, 185, 129, 0.12); }
+.option.wrong { border-color: var(--danger); background: rgba(239, 68, 68, 0.12); }
+
+.spell-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 18px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  color: var(--text);
+  outline: none;
+}
+.spell-input:focus { border-color: var(--primary); }
+
+.quiz-actions { display: flex; gap: 10px; margin-top: 20px; }
+.primary-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.feedback { margin-top: 16px; text-align: center; font-weight: 600; font-size: 16px; }
+.feedback.ok { color: var(--success); }
+.feedback.no { color: var(--danger); }
+
+.quiz-result { margin-top: 20px; text-align: center; padding: 30px; background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); }
+.quiz-result .score { font-size: 40px; font-weight: 800; color: var(--primary); }
+.wrong-review {
+  margin-top: 16px;
+  text-align: left;
+  padding: 16px;
+  background: rgba(239, 68, 68, 0.06);
+  border-radius: 12px;
+}
+.wrong-review h3 { font-size: 15px; margin-bottom: 10px; color: var(--danger); }
+.wrong-review ul { list-style: none; }
+.wrong-review li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.wrong-review li:last-child { border-bottom: none; }
+.wrong-review .w-word { font-weight: 700; color: var(--text); }
+.wrong-review .w-phonetic { color: var(--text-sub); font-size: 12px; margin: 0 6px; }
+.wrong-review .w-meaning { color: var(--text-sub); }
+
+/* ============ 词库页 ============ */
+.library-toolbar { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+#searchInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+}
+#searchInput:focus { border-color: var(--primary); }
+.filter-label { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-sub); white-space: nowrap; }
+.sort-select {
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+.sort-select:focus { border-color: var(--primary); }
+
+.word-count { color: var(--text-sub); font-size: 13px; margin-bottom: 10px; }
+
+.word-list { list-style: none; }
+.word-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  cursor: pointer;
+}
+.word-item:hover { border: 1px solid var(--primary); margin-bottom: 6px; }
+.word-item .w { font-weight: 700; font-size: 17px; }
+.word-item .p { color: var(--text-sub); font-size: 13px; }
+.word-item .m { flex: 1; font-size: 14px; color: var(--text-sub); }
+.word-item .badge { font-size: 12px; padding: 3px 10px; border-radius: 10px; background: var(--primary-light); color: var(--primary); white-space: nowrap; }
+
+/* ============ 响应式 ============ */
+@media (max-width: 520px) {
+  .word { font-size: 32px; }
+  .grade { padding: 10px 16px; font-size: 14px; }
+  .brand { font-size: 15px; }
+  .nav-btn { padding: 6px 12px; font-size: 13px; }
+}

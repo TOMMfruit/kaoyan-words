@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>考研英语背单词</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <header class="topbar">
+    <div class="brand">📚 考研背单词</div>
+    <nav class="nav">
+      <button class="nav-btn active" data-page="study">📖 学习</button>
+      <button class="nav-btn" data-page="test">✏️ 测试</button>
+      <button class="nav-btn" data-page="library">🔍 词库</button>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="切换深色模式">🌙</button>
+  </header>
+
+  <main class="container">
+    <!-- ============ 学习页 ============ -->
+    <section id="page-study" class="page active">
+      <div class="study-header">
+        <div class="stats">
+          <span>今日待学：<b id="todayCount">0</b></span>
+          <span>今日已学：<b id="todayLearned">0</b></span>
+          <span>累计已学：<b id="learnedCount">0</b></span>
+          <span>连续打卡：<b id="streak">0</b> 天</span>
+        </div>
+      </div>
+
+      <!-- 学习设置 -->
+      <div class="settings-bar">
+        <label class="setting-item">每日新词
+          <input type="number" id="newPerDayInput" min="1" max="100" />
+        </label>
+        <label class="setting-item">学习顺序
+          <select id="orderModeSelect">
+            <option value="alphabet">按字母序</option>
+            <option value="reverse">按字母倒序</option>
+            <option value="random">乱序随机</option>
+          </select>
+        </label>
+        <button class="apply-btn" id="applySettings">应用</button>
+        <button class="reset-btn" id="resetBtn">重置记录</button>
+        <button class="apply-btn" id="exportBtn">导出</button>
+        <button class="apply-btn" id="importBtn">导入</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" />
+      </div>
+
+      <!-- 单词卡片 -->
+      <div class="card-wrap">
+        <div class="card" id="flashcard">
+          <div class="card-face card-front">
+            <div class="word" id="cardWord">word</div>
+            <div class="phonetic" id="cardPhonetic">/.../</div>
+            <button class="speak-btn" id="speakBtn" title="朗读发音">🔊</button>
+            <div class="hint">点击卡片查看释义</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="word" id="backWord">word</div>
+            <div class="trans-list" id="cardTrans"></div>
+            <div class="example" id="cardExample">例句</div>
+            <div class="example-cn" id="cardExampleCn">例句翻译</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 自评按钮（翻到背面后出现，文案随新学/复习变化） -->
+      <div class="grade-btns" id="gradeBtns">
+        <button class="grade forget" data-quality="1" id="gradeLow">😵 忘记</button>
+        <button class="grade fuzzy" data-quality="3" id="gradeMid">🤔 模糊</button>
+        <button class="grade know" data-quality="5" id="gradeHigh">😎 认识</button>
+      </div>
+
+      <div class="empty-tip" id="studyEmpty" style="display:none;">
+        🎉 今日任务已完成！明天再来复习吧～
+      </div>
+    </section>
+
+    <!-- ============ 测试页 ============ -->
+    <section id="page-test" class="page">
+      <div class="test-mode-bar">
+        <button class="mode-btn active" data-mode="choice">看词选义</button>
+        <button class="mode-btn" data-mode="spell">看义拼写</button>
+      </div>
+
+      <div class="quiz-box" id="quizBox">
+        <!-- 题目区域，由 JS 动态渲染 -->
+      </div>
+
+      <div class="quiz-result" id="quizResult" style="display:none;">
+        <!-- 测试结果由 JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- ============ 词库页 ============ -->
+    <section id="page-library" class="page">
+      <div class="library-toolbar">
+        <input type="text" id="searchInput" placeholder="搜索单词或释义..." />
+        <label class="filter-label">
+          <input type="checkbox" id="filterLearned" /> 只看已学
+        </label>
+        <select id="sortSelect" class="sort-select">
+          <option value="default">默认顺序</option>
+          <option value="alphabet">按字母序</option>
+          <option value="reverse">按字母倒序</option>
+        </select>
+      </div>
+      <div class="word-count">共 <b id="totalWords">0</b> 词</div>
+      <ul class="word-list" id="wordList"></ul>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/srs.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
